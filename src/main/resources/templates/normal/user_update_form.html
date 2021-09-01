@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="normal/base::layout(~{::section})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <section>
+      <div class="card mr-3 ml-3">
+        <div class="card-body">
+          <h1 class="text-center">Update User Details</h1>
+          <div class="container-fluid mt-1">
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <form
+                  action=""
+                  th:object="${user}"
+                  enctype="multipart/form-data"
+                  method="post"
+                  th:action="@{/user/user-update}"
+                  class="mt-2"
+                >
+                  <div class="container text-center mt-2 mb-3">
+                    <img
+                      style="width: 250px; height: 250px"
+                      class="img-fluid my_profile_pic"
+                      th:src="@{'/img/'+${user.imageUrl}}"
+                      alt=""
+                    />
+                  </div>
+
+                  <input type="hidden" th:value="${user.id}" name="id" />
+
+                  <!-- 	First name field -->
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text mr-1">
+                        <i class="fa fa-plus"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      th:value="${user.name}"
+                      placeholder="Enter Name here"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <!-- Email field -->
+                  <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text mr-1">@</div>
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      th:value="${user.email}"
+                      placeholder="Enter Email here"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <!-- User About -->
+                  <div class="form-group mt-3">
+                    <textarea
+                      name="about"
+                      id="mytextarea"
+                      rows="10"
+                      th:text="${user.about}"
+                      class="form-control"
+                      placeholder="Enter contact description here"
+                    ></textarea>
+                  </div>
+
+                  <!-- Contact Image Filed -->
+
+                  <div class="form-group">
+                    <label for="image">Profile Image</label>
+                    <input
+                      type="file"
+                      placeholder="Choose new profile pic"
+                      class="form-control-file"
+                      id="image"
+                      name="profileImage"
+                    />
+                  </div>
+
+                  <div class="container text-center">
+                    <button class="btn btn-outline-primary">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
